@@ -37,8 +37,17 @@ app.use(helmet());
 app.use(cors());
 app.use(xss_clean());
 
+// swagger ui
+
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.get("/", (req, res) => {
-  res.send("JOBS API");
+  res.send(
+    '<h1 style="color:green;">Welcome To JOBS-API</h1><p style="color:black;">Hemanshu Waghmare Here!! <a href="/api-docs">Check Out My API.. </a></p>'
+  );
 });
 
 // routes
